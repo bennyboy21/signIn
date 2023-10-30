@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-storage.js"></script>
+    <!-- <script defer src="list.js"></script> -->
+    <title>Document</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+    body {
+        background:rgb(255, 255, 255);
+        margin:0px;
+    }
+
+    #question {
+        width:calc(100vw - 50px);
+        position:absolute;
+        top:50px;
+        left:50%;
+        transform:translate(-50%);
+        text-align:center;
+        font-size: 25px;
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 900;
+        color:rgb(30, 30, 30);
+    }
+
+    #boxes {
+        position:fixed;
+        width:calc(100vw -50px);
+        height:fit-content;
+        bottom:75px;
+        left:50%;
+        transform:translate(-50%);
+        display:flex;
+        flex-direction: column;
+        gap:5px;
+    }
+
+    button {
+        width:calc(100vw - 50px);
+        border-radius: 10px;
+        border: 2px solid rgb(200, 200, 200);
+        background:white;
+        color:rgb(30, 30, 30);
+        font-weight: 800;
+        padding:10px 15px;
+    }
+</style>
+
+<body>
+    <div id="question">Some Random Question?</div>
+    <div id="boxes">
+        <button id="one">-</button>
+        <button id="two">-</button>
+        <button id="three">-</button>
+        <button id="four">-</button>
+    </div>
+    <script defer>
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDOrwFpiYuD7Fatx5P4YKqO-vM6quVrYRM",
+            authDomain: "dateyet-a69a0.firebaseapp.com",
+            databaseURL: "https://dateyet-a69a0-default-rtdb.firebaseio.com",
+            projectId: "dateyet-a69a0",
+            storageBucket: "dateyet-a69a0.appspot.com",
+            messagingSenderId: "68054972373",
+            appId: "1:68054972373:web:108f33f587f6908bf3ef5c",
+            measurementId: "G-TVZPWBWJ7P"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        
+        day = new Date().getDate()
+        month = new Date().getMonth()
+        year = new Date().getFullYear()
+
+        hour = new Date().getHours()
+        min = new Date().getMinutes()
+        sec = new Date().getSeconds()
+
+        time = String(hour) + ":" + String(min) + ":" + String(sec)
+
+        textMonth = month
+
+        my_Student_Num = 123456789
+
+        if(day < 10) {
+            day = 0 + String(day)
+        }
+
+        if(textMonth < 10) {
+            textMonth = 0 + String(textMonth)
+        }
+
+        if(year < 10) {
+            year = 0 + String(year)
+        }
+
+        path = "Days/" + day + month + year + "/" + my_Student_Num
+
+
+        firebase.database().ref(path).set({"student": my_Student_Num, "time": time})
+        
+        // document.getElementById("generateLink").addEventListener("click", function() {
+        //     const imageInput = document.getElementById("imageInput");
+        //     const uploadedImage = document.getElementById("uploadedImage");
+        //     const imageLink = document.getElementById("imageLink");
+
+        //     if (imageInput.files.length > 0) {
+        //         const file = imageInput.files[0];
+        //         const imageUrl = URL.createObjectURL(file);
+
+        //         // Display the uploaded image
+        //         uploadedImage.src = imageUrl;
+        //         uploadedImage.style.display = "block";
+
+        //         // Create a link to view the image
+        //         imageLink.href = imageUrl;
+        //         imageLink.style.display = "block";
+                
+        //         firebase.database().ref("img/").set({
+        //             "link":imageUrl
+        //         })
+        //     }
+        // });
+    </script>
+</body>
+</html>
